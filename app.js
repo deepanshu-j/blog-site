@@ -13,7 +13,7 @@ var User = require('./models/user.js');
 var apiAddress =
 	'https://api.openweathermap.org/data/2.5/weather?q=Delhi,India,IN&appid=42865849c80b2a3c2667f2dc5823abc2';
 //port = 8080;
-const port = process.env.port || 5000;
+const port = process.env.PORT || 5000;
 app.set('view engine', 'ejs');
 
 app.use(express.static('public'));
