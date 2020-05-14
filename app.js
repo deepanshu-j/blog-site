@@ -30,8 +30,11 @@ mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 ///data base stuff
+//uri=mongodb://localhost:27017/my_blog_post;
+var uri = 'mongodb+srv://DEEPANSHU:DEEPANSHUJOHAR@cluster0-zxpdy.mongodb.net/test?retryWrites=true&w=majority';
+
 mongoose
-	.connect('mongodb://localhost:27017/my_blog_post', {
+	.connect(uri, {
 		useNewUrlParser: true,
 		useUnifiedTopology: true
 	})
@@ -244,17 +247,16 @@ app.post('/signup', function(req, res, next) {
 	// );
 	User.register(new User({ username: req.body.username, posts: [] }), req.body.password, function(err, user) {
 		if (err) {
-			console.log(err);
+			console.log('error in registration in signup route :\n' + err);
 			return res.render('signup', { req: req });
 		}
 		passport.authenticate('local')(req, res, function() {
 			{
+				console.log('\ncontrol flow in the passport.authenticate \n');
 				res.redirect('/');
 			}
 		});
 	});
-
-	res.redirect('/');
 });
 app.get('/logout', (req, res) => {
 	req.logout();
