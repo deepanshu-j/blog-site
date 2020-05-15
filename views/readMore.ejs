@@ -11,7 +11,7 @@
 </head>
 
 <body style="font-family: 'Open Sans', sans-serif;">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light flex-md-row bd-navbar" style="position: sticky;
+    <nav class="navbar navbar-fixed-top navbar-expand-lg navbar-light bg-light flex-md-row bd-navbar" style="position: sticky;
     top: 0px;
     z-index: 1071">
 
@@ -71,17 +71,23 @@
     </nav>
     
         <!--poSt is an array with only one element that is the one you clicked-->
-        <img src="<%=poSt[0].url%>" style=" width:100%" alt="error">
-
-                <h2 class="bg-text" style="text-align: center;"><%=poSt[0].title%></h2>
-                <h4 class="bg-text2"><%=poSt[0].description%>
-                </h4>
-
+        <img src="<%=poSt[0].url%>" style="width:100%" alt="error">
+                <div class="container" style="font-family:  'Open Sans', sans-serif;">
+                    <br />
+                    <h2 class="container-fluid rounded bg-dark text-white" style="text-align: center;">
+                        <%=poSt[0].title%></h2>
+                    <h4 class="container rounded text-white">
+                        <%=poSt[0].description%>
+                    </h4>
+                </div>
                 <a href="/" style="margin:9px" class="btn btn-primary">Back to homePage</a>
 
                 <%if(isTheSameUser){%>
-                <a class="btn btn-md btn-outline-primary">Edit</a> <%}%>
 
+                <form action="/delete/<%=poSt[0]._id%>?_method=DELETE" method="GET">
+                    <button class="btn btn-md btn-outline-danger">DELETE</button>
+                </form>
+                <%}%>
 
                 <script src=" /jquery-3.4.1.js"></script>
                 <script src="/bootstrap.js"></script>

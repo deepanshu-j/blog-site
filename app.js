@@ -7,6 +7,8 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 var localStrategy = require('passport-local');
 var passportLocalMongoose = require('passport-local-mongoose');
+var methodOverride = require('method-override');
+const ejsLint = require('ejs-lint');
 var Post = require('./models/post.js');
 var User = require('./models/user.js');
 
@@ -262,6 +264,20 @@ app.get('/logout', (req, res) => {
 	req.logout();
 	res.redirect('/');
 });
+
+app.get('/delete/:id', function(req, res) {
+	var deleteMe = req.params.id;
+	console.log('deleted Post with _id :' + deleteMe);
+	Post.findByIdAndRemove(deleteMe, function(err) {
+		if (!err) {
+			res.redirect('/');
+		} else {
+			console.log(err);
+			res.redirect('/');
+		}
+	});
+});
+
 app.get('/about', (req, res, next) => {
 	res.render('about', { req: req });
 });
